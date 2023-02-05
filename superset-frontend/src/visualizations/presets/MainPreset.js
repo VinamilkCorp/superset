@@ -70,6 +70,8 @@ import {
   EchartsTreeChartPlugin,
   EchartsSunburstChartPlugin,
 } from '@superset-ui/plugin-chart-echarts';
+import WaterfallChartPlugin from '@superset-viz-plugins/plugin-chart-waterfall';
+
 import {
   SelectFilterPlugin,
   RangeFilterPlugin,
@@ -168,6 +170,7 @@ export default class MainPreset extends Preset {
         new EchartsTreeChartPlugin().configure({ key: 'tree_chart' }),
         new EchartsSunburstChartPlugin().configure({ key: 'sunburst_v2' }),
         new HandlebarsChartPlugin().configure({ key: 'handlebars' }),
+        new WaterfallChartPlugin().configure({ key: 'nielsen-oss-waterfall' }),
         ...experimentalplugins,
       ],
     });
