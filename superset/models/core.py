@@ -764,6 +764,11 @@ class Database(
     def update_params_from_encrypted_extra(self, params: Dict[str, Any]) -> None:
         self.db_engine_spec.update_params_from_encrypted_extra(self, params)
 
+    def update_params_from_encrypted_extra(  # pylint: disable=invalid-name
+        self, params: Dict[str, Any]
+    ) -> None:
+        self.db_engine_spec.update_params_from_encrypted_extra(self, params)
+
     def get_table(self, table_name: str, schema: Optional[str] = None) -> Table:
         extra = self.get_extra()
         meta = MetaData(**extra.get("metadata_params", {}))

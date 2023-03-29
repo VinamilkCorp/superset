@@ -115,6 +115,8 @@
     "@superset-ui/preset-chart-xy": "file:./plugins/preset-chart-xy",
     "@superset-ui/switchboard": "file:./packages/superset-ui-switchboard",
     "@visx/responsive": "^3.0.0",
+    "@superset-ui/plugin-chart-map-leaflet": "file:./plugins/superset-ui-plugin-chart-map-leaflet",
+    "@superset-viz-plugins/plugin-chart-waterfall": "0.15.1",
     "abortcontroller-polyfill": "^1.1.9",
     "ace-builds": "^1.4.14",
     "antd": "4.10.3",

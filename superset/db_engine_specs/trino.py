@@ -21,6 +21,7 @@ from typing import Any, Dict, Optional, Type, TYPE_CHECKING
 
 import simplejson as json
 from flask import current_app
+from sqlalchemy.engine.reflection import Inspector
 from sqlalchemy.engine.url import URL
 from sqlalchemy.orm import Session
 
