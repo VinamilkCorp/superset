@@ -1,1 +1,1 @@
-docker build -t vnm_superset:1.0.0 .
+docker build -t vnm_superset:1.1.0 .
