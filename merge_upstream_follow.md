@@ -26,6 +26,7 @@
     **Note**: Get commit hash id from list commit in github portal``
 
 6. Push all commit to orgin
+    
     ```git push```
 
 7. Rebuid image:
