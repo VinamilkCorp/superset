@@ -31,7 +31,7 @@
 
 7. Rebuid image:
     
-    ```docker build -t vnm_superset:1.1.0 .```
+    ```docker build -t vinamilkcorp/vnm_superset:2.0.0 .```
     
     **Note**: Change 1.1.0 to your tag
 
