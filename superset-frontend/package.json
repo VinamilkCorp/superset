@@ -125,7 +125,7 @@
     "ace-builds": "^1.4.14",
     "ansi-regex": "^4.1.1",
     "antd": "4.10.3",
-    "antd-watermark": "^1.0.1",
+    "antd-watermark": "git+https://github.com/VinamilkCorp/antd-watermark.git",
     "array-move": "^2.2.1",
     "babel-plugin-typescript-to-proptypes": "^2.0.0",
     "bootstrap": "^3.4.1",
