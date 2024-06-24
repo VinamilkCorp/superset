@@ -39,6 +39,7 @@ import { ResourceStatus } from 'src/hooks/apiResources/apiResources';
 import ChartRenderer from './ChartRenderer';
 import { ChartErrorMessage } from './ChartErrorMessage';
 import { getChartRequiredFieldsMissingMessage } from '../../utils/getChartRequiredFieldsMissingMessage';
+import Watermark from 'antd-watermark';
 
 const propTypes = {
   annotationData: PropTypes.object,
@@ -81,6 +82,7 @@ const propTypes = {
   postTransformProps: PropTypes.func,
   datasetsStatus: PropTypes.oneOf(['loading', 'error', 'complete']),
   isInView: PropTypes.bool,
+  watermarkContent: PropTypes.string,
   emitCrossFilters: PropTypes.bool,
 };
 
@@ -100,6 +102,7 @@ const defaultProps = {
   chartStackTrace: null,
   force: false,
   isInView: true,
+  watermarkContent: 'Vinamilk Dashboard'
 };
 
 const Styles = styled.div`
@@ -134,6 +137,10 @@ const MonospaceDiv = styled.div`
   overflow-x: auto;
   white-space: pre-wrap;
 `;
+
+const wtmRotate = -35
+const wtmGa = [200, 200]
+const wtmfont = { color: 'rgba(255, 51, 0,.3)'}
 
 class Chart extends React.PureComponent {
   constructor(props) {
@@ -253,6 +260,7 @@ class Chart extends React.PureComponent {
       chartIsStale,
       queriesResponse = [],
       width,
+      watermarkContent
     } = this.props;
 
     const isLoading = chartStatus === 'loading';
@@ -298,33 +306,35 @@ class Chart extends React.PureComponent {
     }
 
     return (
-      <ErrorBoundary
-        onError={this.handleRenderContainerFailure}
-        showMessage={false}
-      >
-        <Styles
-          data-ui-anchor="chart"
-          className="chart-container"
-          data-test="chart-container"
-          height={height}
-          width={width}
+      <Watermark content={watermarkContent} rotate={wtmRotate} gap={wtmGa} font={wtmfont}>
+        <ErrorBoundary
+          onError={this.handleRenderContainerFailure}
+          showMessage={false}
         >
-          <div className="slice_container" data-test="slice-container">
-            {this.props.isInView ||
-            !isFeatureEnabled(FeatureFlag.DASHBOARD_VIRTUALIZATION) ||
-            isCurrentUserBot() ? (
-              <ChartRenderer
-                {...this.props}
-                source={this.props.dashboardId ? 'dashboard' : 'explore'}
-                data-test={this.props.vizType}
-              />
-            ) : (
-              <Loading />
-            )}
-          </div>
-          {isLoading && <Loading />}
-        </Styles>
-      </ErrorBoundary>
+          <Styles
+            data-ui-anchor="chart"
+            className="chart-container"
+            data-test="chart-container"
+            height={height}
+            width={width}
+          >
+            <div className="slice_container" data-test="slice-container">
+              {this.props.isInView ||
+              !isFeatureEnabled(FeatureFlag.DASHBOARD_VIRTUALIZATION) ||
+              isCurrentUserBot() ? (
+                <ChartRenderer
+                  {...this.props}
+                  source={this.props.dashboardId ? 'dashboard' : 'explore'}
+                  data-test={this.props.vizType}
+                />
+              ) : (
+                <Loading />
+              )}
+            </div>
+            {isLoading && <Loading />}
+          </Styles>
+        </ErrorBoundary>
+      </Watermark>
     );
   }
 }
