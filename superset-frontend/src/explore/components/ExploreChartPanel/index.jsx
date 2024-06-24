@@ -137,6 +137,7 @@ const ExploreChartPanel = ({
   standalone,
   chartIsStale,
   chartAlert,
+  user
 }) => {
   const theme = useTheme();
   const gutterMargin = theme.gridUnit * GUTTER_SIZE_FACTOR;
@@ -269,6 +270,7 @@ const ExploreChartPanel = ({
             timeout={timeout}
             triggerQuery={chart.triggerQuery}
             vizType={vizType}
+            watermarkContent={user.email}
           />
         )}
       </div>
@@ -296,6 +298,7 @@ const ExploreChartPanel = ({
       timeout,
       triggerRender,
       vizType,
+      user.email
     ],
   );
 

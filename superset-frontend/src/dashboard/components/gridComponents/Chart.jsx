@@ -407,6 +407,7 @@ class Chart extends React.Component {
       isInView,
       emitCrossFilters,
       logEvent,
+      username
     } = this.props;
 
     const { width } = this.state;
@@ -532,6 +533,7 @@ class Chart extends React.Component {
             postTransformProps={postTransformProps}
             datasetsStatus={datasetsStatus}
             isInView={isInView}
+            watermarkContent={isFullSize ? username: ''}
             emitCrossFilters={emitCrossFilters}
           />
         </ChartWrapper>

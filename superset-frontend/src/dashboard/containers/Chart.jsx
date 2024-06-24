@@ -51,6 +51,7 @@ function mapStateToProps(
     sliceEntities,
     nativeFilters,
     common,
+    user
   },
   ownProps,
 ) {
@@ -101,6 +102,7 @@ function mapStateToProps(
     setControlValue,
     datasetsStatus,
     emitCrossFilters: !!dashboardInfo.crossFiltersEnabled,
+    username: user?.email
   };
 }
 

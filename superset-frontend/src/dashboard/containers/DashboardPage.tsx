@@ -52,6 +52,8 @@ import {
 import DashboardContainer from 'src/dashboard/containers/Dashboard';
 
 import shortid from 'shortid';
+import Watermark from 'antd-watermark';
+
 import { RootState } from '../types';
 import {
   chartContextMenuStyles,
@@ -61,6 +63,7 @@ import {
 import SyncDashboardState, {
   getDashboardContextLocalStorage,
 } from '../components/SyncDashboardState';
+
 
 export const DashboardPageIdContext = React.createContext('');
 
@@ -88,6 +91,16 @@ export const DashboardPage: FC<PageProps> = ({ idOrSlug }: PageProps) => {
     ({ dashboardInfo }) =>
       dashboardInfo && Object.keys(dashboardInfo).length > 0,
   );
+  
+  const defaultUsername = 'Vinamilk Dashboard'
+  const username = useSelector<RootState, string>(
+    ({ user }) =>
+      user ? (user.email || defaultUsername) : defaultUsername,
+  );
+  const wtmRotate = -35
+  const wtmGa:[number, number] = [200, 200]
+  const wtmfont = { color: 'rgba(255, 51, 0,.3)'}
+  
   const { addDangerToast } = useToasts();
   const { result: dashboard, error: dashboardApiError } =
     useDashboard(idOrSlug);
@@ -224,20 +237,22 @@ export const DashboardPage: FC<PageProps> = ({ idOrSlug }: PageProps) => {
   if (!readyToRender || !hasDashboardInfoInitiated) return <Loading />;
 
   return (
-    <>
-      <Global
-        styles={[
-          filterCardPopoverStyle(theme),
-          headerStyles(theme),
-          chartContextMenuStyles(theme),
-        ]}
-      />
-      <SyncDashboardState dashboardPageId={dashboardPageId} />
-      <DashboardPageIdContext.Provider value={dashboardPageId}>
-        <DashboardContainer>
-          <DashboardBuilder />
-        </DashboardContainer>
-      </DashboardPageIdContext.Provider>
+    <> 
+      <Watermark content={username} rotate={wtmRotate} gap={wtmGa} font={wtmfont}>
+        <Global
+          styles={[
+            filterCardPopoverStyle(theme),
+            headerStyles(theme),
+            chartContextMenuStyles(theme),
+          ]}
+        />
+        <SyncDashboardState dashboardPageId={dashboardPageId} />
+        <DashboardPageIdContext.Provider value={dashboardPageId}>
+          <DashboardContainer>
+            <DashboardBuilder />
+          </DashboardContainer>
+        </DashboardPageIdContext.Provider>
+      </Watermark>
     </>
   );
 };
