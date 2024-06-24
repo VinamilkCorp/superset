@@ -137,7 +137,7 @@ const ExploreChartPanel = ({
   standalone,
   chartIsStale,
   chartAlert,
-  user
+  user,
 }) => {
   const theme = useTheme();
   const gutterMargin = theme.gridUnit * GUTTER_SIZE_FACTOR;
@@ -298,7 +298,7 @@ const ExploreChartPanel = ({
       timeout,
       triggerRender,
       vizType,
-      user.email
+      user.email,
     ],
   );
 

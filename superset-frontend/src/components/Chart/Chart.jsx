@@ -26,6 +26,7 @@ import {
   styled,
   t,
 } from '@superset-ui/core';
+import Watermark from 'antd-watermark';
 import { PLACEHOLDER_DATASOURCE } from 'src/dashboard/constants';
 import Loading from 'src/components/Loading';
 import { EmptyStateBig } from 'src/components/EmptyState';
@@ -39,7 +40,6 @@ import { ResourceStatus } from 'src/hooks/apiResources/apiResources';
 import ChartRenderer from './ChartRenderer';
 import { ChartErrorMessage } from './ChartErrorMessage';
 import { getChartRequiredFieldsMissingMessage } from '../../utils/getChartRequiredFieldsMissingMessage';
-import Watermark from 'antd-watermark';
 
 const propTypes = {
   annotationData: PropTypes.object,
@@ -102,7 +102,7 @@ const defaultProps = {
   chartStackTrace: null,
   force: false,
   isInView: true,
-  watermarkContent: 'Vinamilk Dashboard'
+  watermarkContent: 'Vinamilk Dashboard',
 };
 
 const Styles = styled.div`
@@ -138,9 +138,9 @@ const MonospaceDiv = styled.div`
   white-space: pre-wrap;
 `;
 
-const wtmRotate = -35
-const wtmGa = [200, 200]
-const wtmfont = { color: 'rgba(255, 51, 0,.3)'}
+const wtmRotate = -35;
+const wtmGa = [200, 200];
+const wtmfont = { color: 'rgba(255, 51, 0,.3)' };
 
 class Chart extends React.PureComponent {
   constructor(props) {
@@ -260,7 +260,7 @@ class Chart extends React.PureComponent {
       chartIsStale,
       queriesResponse = [],
       width,
-      watermarkContent
+      watermarkContent,
     } = this.props;
 
     const isLoading = chartStatus === 'loading';
@@ -306,7 +306,12 @@ class Chart extends React.PureComponent {
     }
 
     return (
-      <Watermark content={watermarkContent} rotate={wtmRotate} gap={wtmGa} font={wtmfont}>
+      <Watermark
+        content={watermarkContent}
+        rotate={wtmRotate}
+        gap={wtmGa}
+        font={wtmfont}
+      >
         <ErrorBoundary
           onError={this.handleRenderContainerFailure}
           showMessage={false}

@@ -45,7 +45,7 @@ function mapStateToProps(state: RootState) {
     dashboardLayout,
     impressionId,
     nativeFilters,
-    user
+    user,
   } = state;
 
   return {
