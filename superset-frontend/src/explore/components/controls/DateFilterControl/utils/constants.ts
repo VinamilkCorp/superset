@@ -33,6 +33,7 @@ export const FRAME_OPTIONS: SelectOptionType[] = [
   { value: 'Custom', label: t('Custom') },
   { value: 'Advanced', label: t('Advanced') },
   { value: 'No filter', label: t('No filter') },
+  { value: 'VNMCustom', label: t('Vinamilk filter') },
 ];
 
 export const COMMON_RANGE_OPTIONS: SelectOptionType[] = [

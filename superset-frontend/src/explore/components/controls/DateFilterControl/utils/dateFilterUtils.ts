@@ -57,7 +57,12 @@ export const guessFrame = (timeRange: string): FrameType => {
   if (timeRange === NO_TIME_RANGE) {
     return 'No filter';
   }
-  if (customTimeRangeDecode(timeRange).matchedFlag) {
+  let customTimeRange = customTimeRangeDecode(timeRange)
+  if (customTimeRange.matchedFlag) {
+    if (customTimeRange.customRange.sinceMode === "specific"
+        && customTimeRange.customRange.untilMode === "specific") {
+      return "VNMCustom"
+    }
     return 'Custom';
   }
   return 'Advanced';

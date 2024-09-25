@@ -52,6 +52,7 @@ import {
   CustomFrame,
   AdvancedFrame,
   DateLabel,
+  VNMCustomFrame,
 } from './components';
 
 const StyledRangeType = styled(Select)`
@@ -301,6 +302,9 @@ export default function DateFilterLabel(props: DateFilterControlProps) {
       )}
       {frame === 'Custom' && (
         <CustomFrame value={timeRangeValue} onChange={setTimeRangeValue} />
+      )}
+      {frame === 'VNMCustom' && (
+        <VNMCustomFrame value={timeRangeValue} onChange={setTimeRangeValue} />
       )}
       {frame === 'No filter' && (
         <div data-test={DATE_FILTER_TEST_KEY.noFilter} />

@@ -26,7 +26,8 @@ export type FrameType =
   | 'Calendar'
   | 'Custom'
   | 'Advanced'
-  | 'No filter';
+  | 'No filter'
+  | 'VNMCustom';
 
 export type DateTimeGrainType =
   | 'second'
@@ -64,6 +65,11 @@ export type CustomRangeType = {
   anchorMode: 'now' | 'specific';
   anchorValue: string;
 };
+
+export type VNMCustomRangeType = {
+  sinceDatetime: string;
+  untilDatetime: string;
+}
 
 export type CustomRangeDecodeType = {
   customRange: CustomRangeType;
