@@ -29,11 +29,11 @@ import {
 
 export const FRAME_OPTIONS: SelectOptionType[] = [
   { value: 'Common', label: t('Last') },
+  { value: 'VNMCustom', label: t('Date filter') },
   { value: 'Calendar', label: t('Previous') },
   { value: 'Custom', label: t('Custom') },
   { value: 'Advanced', label: t('Advanced') },
   { value: 'No filter', label: t('No filter') },
-  { value: 'VNMCustom', label: t('Vinamilk filter') },
 ];
 
 export const COMMON_RANGE_OPTIONS: SelectOptionType[] = [

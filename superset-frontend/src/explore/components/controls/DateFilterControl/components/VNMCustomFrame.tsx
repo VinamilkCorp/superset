@@ -84,8 +84,8 @@ export function VNMCustomFrame(props: FrameComponentProps) {
           }
 
           onChange({
-            'sinceDatetime': momentRange[0] ? momentRange[0].format(MOMENT_FORMAT): sinceDatetime,
-            'untilDatetime': momentRange[1] ? momentRange[1].clone().add(1, 'days').format(MOMENT_FORMAT): untilDatetime,
+            'sinceDatetime': momentRange[0] ? momentRange[0].startOf('day').format(MOMENT_FORMAT): sinceDatetime,
+            'untilDatetime': momentRange[1] ? momentRange[1].clone().startOf('day').add(1, 'days').format(MOMENT_FORMAT): untilDatetime,
           })
         }}
         picker='date'
