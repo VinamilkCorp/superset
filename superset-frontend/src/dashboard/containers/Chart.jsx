@@ -96,6 +96,7 @@ function mapStateToProps(
     supersetCanExplore: !!dashboardInfo.superset_can_explore,
     supersetCanShare: !!dashboardInfo.superset_can_share,
     supersetCanCSV: !!dashboardInfo.superset_can_csv,
+    chartsCanCSV: dashboardInfo.charts_can_csv,
     ownState: dataMask[id]?.ownState,
     filterState: dataMask[id]?.filterState,
     maxRows: common.conf.SQL_MAX_ROW,

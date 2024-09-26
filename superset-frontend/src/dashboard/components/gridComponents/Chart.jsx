@@ -78,6 +78,7 @@ const propTypes = {
   supersetCanExplore: PropTypes.bool.isRequired,
   supersetCanShare: PropTypes.bool.isRequired,
   supersetCanCSV: PropTypes.bool.isRequired,
+  chartsCanCSV: PropTypes.arrayOf(PropTypes.number),
   addSuccessToast: PropTypes.func.isRequired,
   addDangerToast: PropTypes.func.isRequired,
   ownState: PropTypes.object,
@@ -395,6 +396,7 @@ class Chart extends React.Component {
       supersetCanExplore,
       supersetCanShare,
       supersetCanCSV,
+      chartsCanCSV,
       addSuccessToast,
       addDangerToast,
       ownState,
@@ -463,6 +465,7 @@ class Chart extends React.Component {
           supersetCanExplore={supersetCanExplore}
           supersetCanShare={supersetCanShare}
           supersetCanCSV={supersetCanCSV}
+          chartsCanCSV={chartsCanCSV}
           componentId={componentId}
           dashboardId={dashboardId}
           filters={filters}

@@ -355,6 +355,11 @@ export const hydrateDashboard =
             roles,
           ),
           superset_can_csv: findPermission('can_csv', 'Superset', roles),
+          charts_can_csv: Object.values(slices).filter(
+            sl => findPermission('can_csv', `[${sl.slice_id}](id:${sl.slice_id})`, roles)
+          ).map(
+            sl => sl.slice_id
+          ),
           common: {
             // legacy, please use state.common instead
             flash_messages: common?.flash_messages,

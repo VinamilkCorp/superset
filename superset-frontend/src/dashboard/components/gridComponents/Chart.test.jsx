@@ -70,6 +70,7 @@ describe('Chart', () => {
     isExpanded: false,
     supersetCanExplore: false,
     supersetCanCSV: false,
+    chartsCanCSV: [],
   };
 
   function setup(overrideProps) {

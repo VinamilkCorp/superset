@@ -156,6 +156,7 @@ export interface SliceHeaderControlsProps {
   supersetCanExplore?: boolean;
   supersetCanShare?: boolean;
   supersetCanCSV?: boolean;
+  chartsCanCSV: number[];
 
   crossFiltersEnabled?: boolean;
 }
@@ -379,6 +380,8 @@ const SliceHeaderControls = (props: SliceHeaderControlsPropsWithRouter) => {
     animationDuration: '0s',
   };
 
+  const allowCSV = (props.supersetCanCSV || props.chartsCanCSV.indexOf(props.slice.slice_id) >= 0)
+
   const menu = (
     <Menu
       onClick={handleMenuClick}
@@ -489,7 +492,7 @@ const SliceHeaderControls = (props: SliceHeaderControlsPropsWithRouter) => {
         </Menu.SubMenu>
       )}
 
-      {props.slice.viz_type !== 'filter_box' && props.supersetCanCSV && (
+      {props.slice.viz_type !== 'filter_box' && allowCSV && (
         <Menu.SubMenu title={t('Download')}>
           <Menu.Item
             key={MENU_KEYS.EXPORT_CSV}
@@ -506,7 +509,7 @@ const SliceHeaderControls = (props: SliceHeaderControlsPropsWithRouter) => {
 
           {props.slice.viz_type !== 'filter_box' &&
             isFeatureEnabled(FeatureFlag.ALLOW_FULL_CSV_EXPORT) &&
-            props.supersetCanCSV &&
+            allowCSV &&
             isTable && (
               <>
                 <Menu.Item
