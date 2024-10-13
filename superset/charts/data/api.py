@@ -47,6 +47,7 @@ from superset.daos.exceptions import DatasourceNotFound
 from superset.exceptions import QueryObjectValidationError
 from superset.extensions import event_logger
 from superset.models.sql_lab import Query
+from superset.models.slice import Slice
 from superset.utils.core import create_zip, get_user_id, json_int_dttm_ser
 from superset.views.base import CsvResponse, generate_download_headers, XlsxResponse
 from superset.views.base_api import statsd_metrics
@@ -356,7 +357,20 @@ class ChartDataRestApi(ChartRestApi):
 
         if result_format in ChartDataResultFormat.table_like():
             # Verify user has permission to export file
-            if not security_manager.can_access("can_csv", "Superset"):
+            slice = Slice.get(result["query_context"].form_data.get("slice_id"))
+            if not (
+                security_manager.can_access("can_csv", "Superset")
+                or (
+                    slice is not None
+                    and security_manager.can_access(
+                        "can_csv",
+                        security_manager.get_slice_perm(
+                            slice.slice_name,
+                            slice.id
+                        )
+                    )
+                )
+            ):
                 return self.response_403()
 
             if not result["queries"]:

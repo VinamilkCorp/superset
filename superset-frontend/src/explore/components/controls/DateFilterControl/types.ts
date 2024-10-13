@@ -69,7 +69,7 @@ export type CustomRangeType = {
 export type VNMCustomRangeType = {
   sinceDatetime: string;
   untilDatetime: string;
-}
+};
 
 export type CustomRangeDecodeType = {
   customRange: CustomRangeType;

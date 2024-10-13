@@ -54,9 +54,7 @@ FROM python:${PY_VER} AS lean
 
 USER root
 
-RUN --mount=target=/var/lib/apt/lists,type=cache \
-    --mount=target=/var/cache/apt,type=cache \
-    apt-get install -yqq --no-install-recommends \
+RUN apt-get update -qq && apt-get install -yqq --no-install-recommends \
         libnss3 \
         libdbus-glib-1-2 \
         libgtk-3-0 \
@@ -66,16 +64,18 @@ RUN --mount=target=/var/lib/apt/lists,type=cache \
         wget\
         unzip
 
-RUN apt-get update && \
-    wget -q https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_116.0.5845.187-1_amd64.deb && \
-    apt-get install -y --no-install-recommends ./google-chrome-stable_116.0.5845.187-1_amd64.deb && \
-    rm -f google-chrome-stable_116.0.5845.187-1_amd64.deb
+ENV CHROME_VERSION="129.0.6668.100"
 
-RUN export CHROMEDRIVER_VERSION=$(wget -q -O - https://chromedriver.storage.googleapis.com/LATEST_RELEASE_114) && \
-    wget -q https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip && \
-    unzip chromedriver_linux64.zip -d /usr/bin && \
+RUN wget -q https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_${CHROME_VERSION}-1_amd64.deb && \
+    apt-get install -y --no-install-recommends ./google-chrome-stable_${CHROME_VERSION}-1_amd64.deb && \
+    rm -f google-chrome-stable_${CHROME_VERSION}-1_amd64.deb
+
+RUN  wget -q https://storage.googleapis.com/chrome-for-testing-public/${CHROME_VERSION}/linux64/chromedriver-linux64.zip && \
+    unzip chromedriver-linux64.zip -d /tmp && \
+    cp -r /tmp/chromedriver-linux64/* /usr/bin && \
     chmod 755 /usr/bin/chromedriver && \
-    rm -f chromedriver_linux64.zip
+    rm -f chromedriver-linux64.zip &&\
+    rm -r /tmp/chromedriver-linux64
 
 WORKDIR /app
 ENV LANG=C.UTF-8 \

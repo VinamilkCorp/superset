@@ -1,1 +1,1 @@
-docker build -t vnm_superset:1.1.0 .
+docker build -t vinamilkcorp/vnm_superset:3.1.4.1 .

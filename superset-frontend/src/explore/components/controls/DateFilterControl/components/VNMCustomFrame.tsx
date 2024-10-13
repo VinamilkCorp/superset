@@ -27,33 +27,28 @@ import {
   customTimeRangeEncode,
   dttmToMoment,
   LOCALE_MAPPING,
-  MOMENT_FORMAT
+  MOMENT_FORMAT,
 } from 'src/explore/components/controls/DateFilterControl/utils';
 import {
   FrameComponentProps,
-  VNMCustomRangeType
+  VNMCustomRangeType,
 } from 'src/explore/components/controls/DateFilterControl/types';
 import { ExplorePageState } from 'src/explore/types';
-
 
 export function VNMCustomFrame(props: FrameComponentProps) {
   const { customRange, matchedFlag } = customTimeRangeDecode(props.value);
   if (!matchedFlag) {
     props.onChange(customTimeRangeEncode(customRange));
   }
-  
-  const {
-    sinceDatetime,
-    untilDatetime,
-  } = { ...customRange };
+  const { sinceDatetime, untilDatetime } = { ...customRange };
 
   function onChange(newRange: VNMCustomRangeType) {
     props.onChange(
       customTimeRangeEncode({
         ...customRange,
         ...newRange,
-        sinceMode: "specific",
-        untilMode: "specific"
+        sinceMode: 'specific',
+        untilMode: 'specific',
       }),
     );
   }
@@ -76,7 +71,7 @@ export function VNMCustomFrame(props: FrameComponentProps) {
         placeholder={[t('Start date'), t('End date')]}
         defaultValue={[
           dttmToMoment(sinceDatetime).startOf('day'),
-          dttmToMoment(untilDatetime).add(-1, 'days').startOf('day')
+          dttmToMoment(untilDatetime).add(-1, 'days').startOf('day'),
         ]}
         onChange={momentRange => {
           if (!momentRange) {
@@ -84,11 +79,19 @@ export function VNMCustomFrame(props: FrameComponentProps) {
           }
 
           onChange({
-            'sinceDatetime': momentRange[0] ? momentRange[0].startOf('day').format(MOMENT_FORMAT): sinceDatetime,
-            'untilDatetime': momentRange[1] ? momentRange[1].clone().startOf('day').add(1, 'days').format(MOMENT_FORMAT): untilDatetime,
-          })
+            sinceDatetime: momentRange[0]
+              ? momentRange[0].startOf('day').format(MOMENT_FORMAT)
+              : sinceDatetime,
+            untilDatetime: momentRange[1]
+              ? momentRange[1]
+                  .clone()
+                  .startOf('day')
+                  .add(1, 'days')
+                  .format(MOMENT_FORMAT)
+              : untilDatetime,
+          });
         }}
-        picker='date'
+        picker="date"
         allowClear={false}
         locale={datePickerLocale}
       />

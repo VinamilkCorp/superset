@@ -380,7 +380,8 @@ const SliceHeaderControls = (props: SliceHeaderControlsPropsWithRouter) => {
     animationDuration: '0s',
   };
 
-  const allowCSV = (props.supersetCanCSV || props.chartsCanCSV.indexOf(props.slice.slice_id) >= 0)
+  const allowCSV =
+    props.supersetCanCSV || props.chartsCanCSV.indexOf(slice.slice_id) >= 0;
 
   const menu = (
     <Menu
